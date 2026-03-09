@@ -1,0 +1,33 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "angelscript",
+      "camelcase": "AngelScript",
+      "scope": "source.angelscript",
+      "file-types": [
+        "as", "angelscript"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "AngelScript grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "nazarpunk",
+        "email": "nazarpunk@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/WarRaft/tree-sitter-as"
+    }
+  },
+  "bindings": {
+    "go": false,
+    "python": false,
+    "swift": false,
+    "node": false
+  }
+}

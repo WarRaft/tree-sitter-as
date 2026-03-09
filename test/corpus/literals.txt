@@ -1,0 +1,104 @@
+================================================================================
+Integer literal
+================================================================================
+
+void f() { int x = 42; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (integer_literal)))))
+        (semicolon)))))
+
+================================================================================
+Float literal
+================================================================================
+
+void f() { float x = 3.14; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (float_literal)))))
+        (semicolon)))))
+
+================================================================================
+String literal
+================================================================================
+
+void f() { string s = "hello"; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (string_literal)))))
+        (semicolon)))))
+
+================================================================================
+Bool literal true
+================================================================================
+
+void f() { bool b = true; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (bool_literal)))))
+        (semicolon)))))
+
+================================================================================
+Hex literal
+================================================================================
+
+void f() { int x = 0xFF; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (hex_literal)))))
+        (semicolon)))))

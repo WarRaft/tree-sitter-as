@@ -1,0 +1,29 @@
+[package]
+name = "tree-sitter-as"
+description = "AngelScript grammar for tree-sitter"
+version = "0.1.0"
+authors = ["nazarpunk <nazarpunk@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+keywords = ["incremental", "parsing", "tree-sitter", "angelscript"]
+categories = ["parser-implementations", "parsing", "text-editors"]
+repository = "https://github.com/WarRaft/tree-sitter-as"
+edition = "2024"
+autoexamples = false
+build = "bindings/rust/build.rs"
+include = [
+    "bindings/rust/*",
+    "grammar.js",
+    "queries/*",
+    "src/*",
+    "tree-sitter.json",
+    "LICENSE",
+]
+[lib]
+path = "bindings/rust/lib.rs"
+[dependencies]
+tree-sitter-language = "0.1.7"
+[build-dependencies]
+cc = "1.2.56"
+[dev-dependencies]
+tree-sitter = "0.26.6"

@@ -1,0 +1,196 @@
+================================================================================
+If statement
+================================================================================
+
+void f() {
+  if (x > 0) {
+    y = 1;
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (if_statement
+        condition: (expression
+          (binary_expression
+            left: (expression (primary_expression (identifier)))
+            right: (expression (primary_expression (integer_literal)))))
+        consequence: (block
+          (expression_statement
+            (expression
+              (assignment_expression
+                left: (expression (primary_expression (identifier)))
+                operator: (assignment_operator)
+                right: (expression (primary_expression (integer_literal)))))
+            (semicolon)))))))
+
+================================================================================
+If-else statement
+================================================================================
+
+void f() {
+  if (x) {
+    a = 1;
+  } else {
+    b = 2;
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (if_statement
+        condition: (expression (primary_expression (identifier)))
+        consequence: (block
+          (expression_statement
+            (expression
+              (assignment_expression
+                left: (expression (primary_expression (identifier)))
+                operator: (assignment_operator)
+                right: (expression (primary_expression (integer_literal)))))
+            (semicolon)))
+        alternative: (block
+          (expression_statement
+            (expression
+              (assignment_expression
+                left: (expression (primary_expression (identifier)))
+                operator: (assignment_operator)
+                right: (expression (primary_expression (integer_literal)))))
+            (semicolon)))))))
+
+================================================================================
+While loop
+================================================================================
+
+void f() {
+  while (i < 10) {
+    i++;
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (while_statement
+        condition: (expression
+          (binary_expression
+            left: (expression (primary_expression (identifier)))
+            right: (expression (primary_expression (integer_literal)))))
+        body: (block
+          (expression_statement
+            (expression
+              (postfix_expression
+                operand: (expression (primary_expression (identifier)))))
+            (semicolon)))))))
+
+================================================================================
+For loop
+================================================================================
+
+void f() {
+  for (int i = 0; i < 10; i++) {}
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (for_statement
+        (variable_declaration_statement
+          (variable_declaration
+            type: (type (primitive_type))
+            (declarator
+              name: (identifier)
+              value: (expression (primary_expression (integer_literal)))))
+          (semicolon))
+        condition: (expression
+          (binary_expression
+            left: (expression (primary_expression (identifier)))
+            right: (expression (primary_expression (integer_literal)))))
+        (semicolon)
+        update: (expression_list
+          (expression
+            (postfix_expression
+              operand: (expression (primary_expression (identifier))))))
+        body: (block)))))
+
+================================================================================
+Return statement
+================================================================================
+
+int f() {
+  return 42;
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (return_statement
+        (expression (primary_expression (integer_literal)))
+        (semicolon)))))
+
+================================================================================
+Break statement
+================================================================================
+
+void f() {
+  while (true) { break; }
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (while_statement
+        condition: (expression (primary_expression (bool_literal)))
+        body: (block
+          (break_statement (semicolon)))))))
+
+================================================================================
+Switch statement
+================================================================================
+
+void f() {
+  switch (x) {
+    case 1: break;
+    default: break;
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (switch_statement
+        value: (expression (primary_expression (identifier)))
+        (switch_case
+          value: (expression (primary_expression (integer_literal)))
+          (break_statement (semicolon)))
+        (switch_case
+          (break_statement (semicolon)))))))

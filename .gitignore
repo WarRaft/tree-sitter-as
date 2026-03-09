@@ -1,0 +1,22 @@
+**/Cargo.lock
+.idea/
+# Rust artifacts
+target/
+# Node artifacts
+build/
+prebuilds/
+node_modules/
+# C artifacts
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+# Zig artifacts
+.zig-cache/
+zig-cache/
+zig-out/
+# Grammar volatiles
+*.wasm
+*.obj
+*.o
