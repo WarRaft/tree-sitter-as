@@ -1904,17 +1904,7 @@
   {
     "type": "string_literal",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "escape_sequence",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "subscript_expression",
@@ -2239,6 +2229,10 @@
             "named": false
           },
           {
+            "type": "@",
+            "named": false
+          },
+          {
             "type": "not",
             "named": false
           },
@@ -2386,10 +2380,6 @@
     "named": false
   },
   {
-    "type": "\"",
-    "named": false
-  },
-  {
     "type": "#include",
     "named": false
   },
@@ -2411,10 +2401,6 @@
   },
   {
     "type": "&=",
-    "named": false
-  },
-  {
-    "type": "'",
     "named": false
   },
   {
@@ -2646,10 +2632,6 @@
   {
     "type": "enum",
     "named": false
-  },
-  {
-    "type": "escape_sequence",
-    "named": true
   },
   {
     "type": "explicit",

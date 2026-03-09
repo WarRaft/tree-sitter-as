@@ -32,6 +32,10 @@ const PREC = {
 module.exports = grammar({
     name: 'angelscript',
 
+    externals: $ => [
+        $._adjacent_strings,
+    ],
+
     extras: $ => [
         /\s/,
         $.comment,
@@ -41,13 +45,7 @@ module.exports = grammar({
     word: $ => $.identifier,
 
     conflicts: $ => [
-        [$.function_call, $.primary_expression],
-        [$.variable_declaration, $.expression_statement],
-        [$.type, $.expression],
-        [$.namespace_access, $.member_access],
-        [$.function_declaration, $.variable_declaration],
         [$.primary_expression, $.scoped_name],
-        [$.block, $.initializer_list],
     ],
 
     rules: {
@@ -462,7 +460,7 @@ module.exports = grammar({
         ),
 
         unary_expression: $ => prec.right(PREC.UNARY, seq(
-            field('operator', choice('!', 'not', '-', '+', '~', '++', '--')),
+            field('operator', choice('!', 'not', '-', '+', '~', '++', '--', '@')),
             field('operand', $.expression),
         )),
 
@@ -626,23 +624,8 @@ module.exports = grammar({
             optional(/[fF]/),
         )),
 
-        string_literal: $ => choice(
-            seq('"', repeat(choice($._string_content_double, $.escape_sequence)), '"'),
-            seq("'", repeat(choice($._string_content_single, $.escape_sequence)), "'"),
-        ),
+        string_literal: $ => $._adjacent_strings,
 
-        _string_content_double: _ => /[^"\\]+/,
-        _string_content_single: _ => /[^'\\]+/,
-
-        escape_sequence: _ => token(seq(
-            '\\',
-            choice(
-                /[nrt'"\\0abfv]/,
-                /x[0-9a-fA-F]{1,4}/,
-                /u[0-9a-fA-F]{4}/,
-                /U[0-9a-fA-F]{8}/,
-            ),
-        )),
 
         // ─── Identifier ─────────────────────────────────────────────────────────
 

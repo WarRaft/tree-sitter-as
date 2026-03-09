@@ -102,3 +102,48 @@ void f() { int x = 0xFF; }
             name: (identifier)
             value: (expression (primary_expression (hex_literal)))))
         (semicolon)))))
+
+================================================================================
+Triple-quoted string literal
+================================================================================
+
+void f() { string s = """she said "hello" """; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (string_literal)))))
+        (semicolon)))))
+
+================================================================================
+Adjacent string literals
+================================================================================
+
+void f() { string s = "a"
+"b"
+"c"; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (primitive_type))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (string_literal)))))
+        (semicolon)))))
+

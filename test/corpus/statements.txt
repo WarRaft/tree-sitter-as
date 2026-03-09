@@ -194,3 +194,46 @@ void f() {
           (break_statement (semicolon)))
         (switch_case
           (break_statement (semicolon)))))))
+
+================================================================================
+Handle reference with @
+================================================================================
+
+int CountUnitsInGroupNoCondition(group g) {
+    bj_groupCountUnits = 0;
+    ForGroup(g, @CountUnitsInGroupNoConditionNumbers);
+    return bj_groupCountUnits;
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (primitive_type))
+    name: (identifier)
+    params: (parameter_list
+      (parameter
+        type: (type (scoped_name (identifier)))
+        name: (identifier)))
+    (block
+      (expression_statement
+        (expression
+          (assignment_expression
+            left: (expression (primary_expression (identifier)))
+            operator: (assignment_operator)
+            right: (expression (primary_expression (integer_literal)))))
+        (semicolon))
+      (expression_statement
+        (expression
+          (function_call
+            callee: (expression (primary_expression (identifier)))
+            args: (argument_list
+              (expression (primary_expression (identifier)))
+              (expression
+                (unary_expression
+                  operand: (expression (primary_expression (identifier))))))))
+        (semicolon))
+      (return_statement
+        (expression (primary_expression (identifier)))
+        (semicolon)))))
+

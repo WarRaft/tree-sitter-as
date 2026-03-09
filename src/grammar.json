@@ -2711,6 +2711,10 @@
                 {
                   "type": "STRING",
                   "value": "--"
+                },
+                {
+                  "type": "STRING",
+                  "value": "@"
                 }
               ]
             }
@@ -3669,108 +3673,8 @@
       }
     },
     "string_literal": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "\""
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_string_content_double"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "escape_sequence"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "STRING",
-              "value": "\""
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "'"
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_string_content_single"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "escape_sequence"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "STRING",
-              "value": "'"
-            }
-          ]
-        }
-      ]
-    },
-    "_string_content_double": {
-      "type": "PATTERN",
-      "value": "[^\"\\\\]+"
-    },
-    "_string_content_single": {
-      "type": "PATTERN",
-      "value": "[^'\\\\]+"
-    },
-    "escape_sequence": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "\\"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[nrt'\"\\\\0abfv]"
-              },
-              {
-                "type": "PATTERN",
-                "value": "x[0-9a-fA-F]{1,4}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "u[0-9a-fA-F]{4}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "U[0-9a-fA-F]{8}"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "SYMBOL",
+      "name": "_adjacent_strings"
     },
     "identifier": {
       "type": "PATTERN",
@@ -3833,36 +3737,17 @@
   ],
   "conflicts": [
     [
-      "function_call",
-      "primary_expression"
-    ],
-    [
-      "variable_declaration",
-      "expression_statement"
-    ],
-    [
-      "type",
-      "expression"
-    ],
-    [
-      "namespace_access",
-      "member_access"
-    ],
-    [
-      "function_declaration",
-      "variable_declaration"
-    ],
-    [
       "primary_expression",
       "scoped_name"
-    ],
-    [
-      "block",
-      "initializer_list"
     ]
   ],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_adjacent_strings"
+    }
+  ],
   "inline": [],
   "supertypes": [],
   "reserved": {}
