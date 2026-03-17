@@ -23,6 +23,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "using_namespace_declaration"
+        },
+        {
+          "type": "SYMBOL",
           "name": "function_declaration"
         },
         {
@@ -144,6 +148,43 @@
             "content": {
               "type": "SYMBOL",
               "name": "string_literal"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "semicolon"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "using_namespace_declaration": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "using"
+          },
+          {
+            "type": "STRING",
+            "value": "namespace"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "scoped_name"
             }
           },
           {
@@ -1789,6 +1830,13 @@
       "content": {
         "type": "SEQ",
         "members": [
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_modifier"
+            }
+          },
           {
             "type": "SYMBOL",
             "name": "variable_declaration"

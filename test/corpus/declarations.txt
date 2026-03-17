@@ -57,6 +57,41 @@ class Foo {
       (semicolon))))
 
 ================================================================================
+Class with private and protected members
+================================================================================
+
+class Foo {
+  private int a;
+  protected int b;
+  private void SomeMethod() {}
+  protected void AnotherMethod() {}
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (class_declaration
+    name: (identifier)
+    (variable_declaration_statement
+      (variable_declaration
+        type: (type (primitive_type))
+        (declarator name: (identifier)))
+      (semicolon))
+    (variable_declaration_statement
+      (variable_declaration
+        type: (type (primitive_type))
+        (declarator name: (identifier)))
+      (semicolon))
+    (function_declaration
+      return_type: (type (primitive_type))
+      name: (identifier)
+      (block))
+    (function_declaration
+      return_type: (type (primitive_type))
+      name: (identifier)
+      (block))))
+
+================================================================================
 Enum declaration
 ================================================================================
 
@@ -93,3 +128,17 @@ interface IFoo {
       return_type: (type (primitive_type))
       name: (identifier)
       (semicolon))))
+
+================================================================================
+Using namespace declaration
+================================================================================
+
+using namespace MyNamespace;
+
+--------------------------------------------------------------------------------
+
+(script
+  (using_namespace_declaration
+    name: (scoped_name (identifier))
+    (semicolon)))
+

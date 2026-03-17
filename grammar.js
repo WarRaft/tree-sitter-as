@@ -56,6 +56,7 @@ module.exports = grammar({
         _top_level_statement: $ => choice(
             $.import_declaration,
             $.include_directive,
+            $.using_namespace_declaration,
             $.function_declaration,
             $.class_declaration,
             $.interface_declaration,
@@ -85,6 +86,15 @@ module.exports = grammar({
             ')',
             'from',
             field('module', $.string_literal),
+            optional($.semicolon),
+        )),
+
+        // ─── Using namespace ─────────────────────────────────────────────────────
+
+        using_namespace_declaration: $ => prec.right(seq(
+            'using',
+            'namespace',
+            field('name', $.scoped_name),
             optional($.semicolon),
         )),
 
@@ -380,6 +390,7 @@ module.exports = grammar({
         )),
 
         variable_declaration_statement: $ => prec.right(seq(
+            repeat($._modifier),
             $.variable_declaration,
             optional($.semicolon),
         )),
