@@ -12,7 +12,7 @@ void f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (if_statement
@@ -45,7 +45,7 @@ void f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (if_statement
@@ -81,7 +81,7 @@ void f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (while_statement
@@ -108,13 +108,13 @@ void f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (for_statement
         (variable_declaration_statement
           (variable_declaration
-            type: (type (primitive_type))
+            type: (type (scoped_name (identifier)))
             (declarator
               name: (identifier)
               value: (expression (primary_expression (integer_literal)))))
@@ -142,7 +142,7 @@ int f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (return_statement
@@ -161,11 +161,11 @@ void f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (while_statement
-        condition: (expression (primary_expression (bool_literal)))
+        condition: (expression (primary_expression (identifier)))
         body: (block
           (break_statement (semicolon)))))))
 
@@ -184,7 +184,7 @@ void f() {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (switch_statement
@@ -209,7 +209,7 @@ int CountUnitsInGroupNoCondition(group g) {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     params: (parameter_list
       (parameter

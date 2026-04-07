@@ -8,12 +8,12 @@ void f() { int x = 42; }
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
             value: (expression (primary_expression (integer_literal)))))
@@ -29,12 +29,12 @@ void f() { float x = 3.14; }
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
             value: (expression (primary_expression (float_literal)))))
@@ -50,19 +50,19 @@ void f() { string s = "hello"; }
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
             value: (expression (primary_expression (string_literal)))))
         (semicolon)))))
 
 ================================================================================
-Bool literal true
+Bool keyword as identifier
 ================================================================================
 
 void f() { bool b = true; }
@@ -71,15 +71,15 @@ void f() { bool b = true; }
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
-            value: (expression (primary_expression (bool_literal)))))
+            value: (expression (primary_expression (identifier)))))
         (semicolon)))))
 
 ================================================================================
@@ -92,12 +92,12 @@ void f() { int x = 0xFF; }
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
             value: (expression (primary_expression (hex_literal)))))
@@ -113,12 +113,12 @@ void f() { string s = """she said "hello" """; }
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
             value: (expression (primary_expression (string_literal)))))
@@ -136,14 +136,35 @@ void f() { string s = "a"
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block
       (variable_declaration_statement
         (variable_declaration
-          type: (type (primitive_type))
+          type: (type (scoped_name (identifier)))
           (declarator
             name: (identifier)
             value: (expression (primary_expression (string_literal)))))
+        (semicolon)))))
+
+================================================================================
+Char literal as number
+================================================================================
+
+void f() { int c = 'A'; }
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (scoped_name (identifier)))
+    name: (identifier)
+    (block
+      (variable_declaration_statement
+        (variable_declaration
+          type: (type (scoped_name (identifier)))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (char_literal)))))
         (semicolon)))))
 

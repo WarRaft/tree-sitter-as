@@ -8,7 +8,7 @@ void HelloWorld() {}
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     (block)))
 
@@ -24,11 +24,11 @@ int Add(int a, int b) {
 
 (script
   (function_declaration
-    return_type: (type (primitive_type))
+    return_type: (type (scoped_name (identifier)))
     name: (identifier)
     params: (parameter_list
-      (parameter type: (type (primitive_type)) name: (identifier))
-      (parameter type: (type (primitive_type)) name: (identifier)))
+      (parameter type: (type (scoped_name (identifier))) name: (identifier))
+      (parameter type: (type (scoped_name (identifier))) name: (identifier)))
     (block
       (return_statement
         (expression
@@ -52,7 +52,7 @@ class Foo {
     name: (identifier)
     (variable_declaration_statement
       (variable_declaration
-        type: (type (primitive_type))
+        type: (type (scoped_name (identifier)))
         (declarator name: (identifier)))
       (semicolon))))
 
@@ -74,20 +74,20 @@ class Foo {
     name: (identifier)
     (variable_declaration_statement
       (variable_declaration
-        type: (type (primitive_type))
+        type: (type (scoped_name (identifier)))
         (declarator name: (identifier)))
       (semicolon))
     (variable_declaration_statement
       (variable_declaration
-        type: (type (primitive_type))
+        type: (type (scoped_name (identifier)))
         (declarator name: (identifier)))
       (semicolon))
     (function_declaration
-      return_type: (type (primitive_type))
+      return_type: (type (scoped_name (identifier)))
       name: (identifier)
       (block))
     (function_declaration
-      return_type: (type (primitive_type))
+      return_type: (type (scoped_name (identifier)))
       name: (identifier)
       (block))))
 
@@ -125,9 +125,29 @@ interface IFoo {
   (interface_declaration
     name: (identifier)
     (interface_method
-      return_type: (type (primitive_type))
+      return_type: (type (scoped_name (identifier)))
       name: (identifier)
       (semicolon))))
+
+================================================================================
+Variable declaration with constructor args
+================================================================================
+
+array<unit> g_VK(12);
+
+--------------------------------------------------------------------------------
+
+(script
+  (variable_declaration_statement
+    (variable_declaration
+      type: (type
+        (scoped_name (identifier))
+        (type (scoped_name (identifier))))
+      (declarator
+        name: (identifier)
+        args: (argument_list
+          (expression (primary_expression (integer_literal))))))
+    (semicolon)))
 
 ================================================================================
 Using namespace declaration

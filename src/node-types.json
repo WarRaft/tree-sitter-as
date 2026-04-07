@@ -284,11 +284,6 @@
     }
   },
   {
-    "type": "bool_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "break_statement",
     "named": true,
     "fields": {},
@@ -405,6 +400,16 @@
     "type": "declarator",
     "named": true,
     "fields": {
+      "args": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1752,7 +1757,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
+          "type": "char_literal",
           "named": true
         },
         {
@@ -1780,32 +1785,15 @@
           "named": true
         },
         {
-          "type": "null_literal",
-          "named": true
-        },
-        {
           "type": "parenthesized_expression",
           "named": true
         },
         {
           "type": "string_literal",
           "named": true
-        },
-        {
-          "type": "super_expression",
-          "named": true
-        },
-        {
-          "type": "this_expression",
-          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "primitive_type",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "return_statement",
@@ -2145,10 +2133,6 @@
       "types": [
         {
           "type": "array_type_suffix",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
           "named": true
         },
         {
@@ -2594,10 +2578,6 @@
     "named": false
   },
   {
-    "type": "auto",
-    "named": false
-  },
-  {
     "type": "bits_literal",
     "named": true
   },
@@ -2605,10 +2585,6 @@
     "type": "block_comment",
     "named": true,
     "extra": true
-  },
-  {
-    "type": "bool",
-    "named": false
   },
   {
     "type": "break",
@@ -2625,6 +2601,10 @@
   {
     "type": "catch",
     "named": false
+  },
+  {
+    "type": "char_literal",
+    "named": true
   },
   {
     "type": "class",
@@ -2656,10 +2636,6 @@
     "named": false
   },
   {
-    "type": "double",
-    "named": false
-  },
-  {
     "type": "else",
     "named": false
   },
@@ -2676,15 +2652,7 @@
     "named": false
   },
   {
-    "type": "false",
-    "named": false
-  },
-  {
     "type": "final",
-    "named": false
-  },
-  {
-    "type": "float",
     "named": false
   },
   {
@@ -2728,26 +2696,6 @@
     "named": false
   },
   {
-    "type": "int",
-    "named": false
-  },
-  {
-    "type": "int16",
-    "named": false
-  },
-  {
-    "type": "int32",
-    "named": false
-  },
-  {
-    "type": "int64",
-    "named": false
-  },
-  {
-    "type": "int8",
-    "named": false
-  },
-  {
     "type": "integer_literal",
     "named": true
   },
@@ -2774,10 +2722,6 @@
   {
     "type": "not",
     "named": false
-  },
-  {
-    "type": "null_literal",
-    "named": true
   },
   {
     "type": "opImplCast",
@@ -2816,27 +2760,11 @@
     "named": false
   },
   {
-    "type": "string",
-    "named": false
-  },
-  {
-    "type": "super_expression",
-    "named": true
-  },
-  {
     "type": "switch",
     "named": false
   },
   {
-    "type": "this_expression",
-    "named": true
-  },
-  {
     "type": "throw",
-    "named": false
-  },
-  {
-    "type": "true",
     "named": false
   },
   {
@@ -2848,31 +2776,7 @@
     "named": false
   },
   {
-    "type": "uint",
-    "named": false
-  },
-  {
-    "type": "uint16",
-    "named": false
-  },
-  {
-    "type": "uint32",
-    "named": false
-  },
-  {
-    "type": "uint64",
-    "named": false
-  },
-  {
-    "type": "uint8",
-    "named": false
-  },
-  {
     "type": "using",
-    "named": false
-  },
-  {
-    "type": "void",
     "named": false
   },
   {

@@ -66,29 +66,9 @@ static bool scan_double_quoted_string(TSLexer *lexer) {
     return false; // unterminated string
 }
 
-// Try to scan a single-quoted string: '...'
-static bool scan_single_quoted_string(TSLexer *lexer) {
-    if (lexer->lookahead != '\'') return false;
-    lexer->advance(lexer, false); // consume opening '
-    while (lexer->lookahead != 0) {
-        if (lexer->lookahead == '\\') {
-            lexer->advance(lexer, false);
-            if (lexer->lookahead != 0) {
-                lexer->advance(lexer, false);
-            }
-        } else if (lexer->lookahead == '\'') {
-            lexer->advance(lexer, false); // closing '
-            return true;
-        } else {
-            lexer->advance(lexer, false);
-        }
-    }
-    return false; // unterminated string
-}
-
-// Scan any string literal (double, single, or triple-quoted)
+// Scan any string literal (double or triple-quoted)
 static bool scan_any_string(TSLexer *lexer) {
-    return scan_double_quoted_string(lexer) || scan_single_quoted_string(lexer);
+    return scan_double_quoted_string(lexer);
 }
 
 void *tree_sitter_angelscript_external_scanner_create(void) {
@@ -120,8 +100,8 @@ bool tree_sitter_angelscript_external_scanner_scan(
         lexer->advance(lexer, true);
     }
 
-    // We need to find at least one string literal
-    if (lexer->lookahead != '"' && lexer->lookahead != '\'') return false;
+    // We need to find at least one double-quoted string literal
+    if (lexer->lookahead != '"') return false;
 
     // Scan the first string
     if (!scan_any_string(lexer)) return false;
@@ -135,8 +115,8 @@ bool tree_sitter_angelscript_external_scanner_scan(
         // Skip whitespace between strings — include in token (advance with false)
         skip_whitespace_non_skip(lexer);
 
-        // Check for another string
-        if (lexer->lookahead != '"' && lexer->lookahead != '\'') break;
+        // Check for another double-quoted string
+        if (lexer->lookahead != '"') break;
 
         if (!scan_any_string(lexer)) break;
 

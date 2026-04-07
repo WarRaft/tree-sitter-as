@@ -5,6 +5,11 @@
  * in applications (e.g., games using Angelscript). It has C-like syntax with
  * classes, interfaces, enums, templates, and optional types.
  *
+ * Built-in types (void, int, float, bool, string, etc.) and value keywords
+ * (true, false, null, this, super) are NOT hardcoded in this grammar — they
+ * are parsed as regular identifiers. Semantic resolution (type checking,
+ * highlighting, etc.) is left to the language server.
+ *
  * Reference: https://www.angelcode.com/angelscript/sdk/docs/manual/doc_script.html
  */
 
@@ -46,6 +51,7 @@ module.exports = grammar({
 
     conflicts: $ => [
         [$.primary_expression, $.scoped_name],
+        [$.interface_method, $.declarator],
     ],
 
     rules: {
@@ -401,10 +407,13 @@ module.exports = grammar({
             repeat(seq(',', $.declarator)),
         ),
 
-        declarator: $ => seq(
+        declarator: $ => prec.right(seq(
             field('name', $.identifier),
-            optional(seq('=', field('value', $.expression))),
-        ),
+            optional(choice(
+                seq('=', field('value', $.expression)),
+                seq('(', field('args', optional($.argument_list)), ')'),
+            )),
+        )),
 
         expression_statement: $ => prec.right(seq(
             $.expression,
@@ -535,11 +544,8 @@ module.exports = grammar({
             $.float_literal,
             $.hex_literal,
             $.bits_literal,
+            $.char_literal,
             $.string_literal,
-            $.bool_literal,
-            $.null_literal,
-            $.this_expression,
-            $.super_expression,
             $.identifier,
             $.parenthesized_expression,
             $.initializer_list,
@@ -565,20 +571,12 @@ module.exports = grammar({
             ')',
         ),
 
-        void_expression: _ => 'void',
-        this_expression: _ => 'this',
-        super_expression: _ => 'super',
-        null_literal: _ => 'null',
-        bool_literal: _ => choice('true', 'false'),
 
         // ─── Types ──────────────────────────────────────────────────────────────
 
         type: $ => seq(
             optional('const'),
-            choice(
-                $.primitive_type,
-                $.scoped_name,
-            ),
+            $.scoped_name,
             optional(seq('<', $.type, repeat(seq(',', $.type)), '>')),
             optional($.array_type_suffix),
             optional('@'),
@@ -586,15 +584,6 @@ module.exports = grammar({
             optional('?'),
         ),
 
-        primitive_type: _ => choice(
-            'void',
-            'int', 'int8', 'int16', 'int32', 'int64',
-            'uint', 'uint8', 'uint16', 'uint32', 'uint64',
-            'float', 'double',
-            'bool',
-            'string',
-            'auto',
-        ),
 
         array_type_suffix: _ => seq('[', ']'),
 
@@ -636,6 +625,12 @@ module.exports = grammar({
         )),
 
         string_literal: $ => $._adjacent_strings,
+
+        char_literal: _ => token(seq(
+            '\'',
+            /[^']*/,
+            '\'',
+        )),
 
 
         // ─── Identifier ─────────────────────────────────────────────────────────
