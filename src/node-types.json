@@ -95,13 +95,9 @@
         ]
       },
       "operator": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "!",
-            "named": false
-          },
           {
             "type": "!=",
             "named": false
@@ -179,8 +175,12 @@
             "named": false
           },
           {
-            "type": "is",
-            "named": false
+            "type": "is_operator",
+            "named": true
+          },
+          {
+            "type": "not_is_operator",
+            "named": true
           },
           {
             "type": "or",
@@ -797,6 +797,20 @@
           }
         ]
       },
+      "init": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "variable_declaration",
+            "named": true
+          }
+        ]
+      },
       "update": {
         "multiple": false,
         "required": false,
@@ -813,15 +827,7 @@
       "required": true,
       "types": [
         {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
           "type": "semicolon",
-          "named": true
-        },
-        {
-          "type": "variable_declaration_statement",
           "named": true
         }
       ]
@@ -1421,6 +1427,11 @@
     }
   },
   {
+    "type": "is_operator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "lambda_expression",
     "named": true,
     "fields": {
@@ -1642,6 +1653,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "not_is_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "override_qualifier",
@@ -2696,6 +2712,10 @@
     "named": false
   },
   {
+    "type": "inout",
+    "named": false
+  },
+  {
     "type": "integer_literal",
     "named": true
   },
@@ -2729,6 +2749,10 @@
   },
   {
     "type": "or",
+    "named": false
+  },
+  {
+    "type": "out",
     "named": false
   },
   {

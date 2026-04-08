@@ -97,7 +97,7 @@ void f() {
             (semicolon)))))))
 
 ================================================================================
-For loop
+For loop with variable declaration
 ================================================================================
 
 void f() {
@@ -112,13 +112,45 @@ void f() {
     name: (identifier)
     (block
       (for_statement
-        (variable_declaration_statement
-          (variable_declaration
-            type: (type (scoped_name (identifier)))
-            (declarator
-              name: (identifier)
-              value: (expression (primary_expression (integer_literal)))))
-          (semicolon))
+        init: (variable_declaration
+          type: (type (scoped_name (identifier)))
+          (declarator
+            name: (identifier)
+            value: (expression (primary_expression (integer_literal)))))
+        (semicolon)
+        condition: (expression
+          (binary_expression
+            left: (expression (primary_expression (identifier)))
+            right: (expression (primary_expression (integer_literal)))))
+        (semicolon)
+        update: (expression_list
+          (expression
+            (postfix_expression
+              operand: (expression (primary_expression (identifier))))))
+        body: (block)))))
+
+================================================================================
+For loop with expression init
+================================================================================
+
+void f() {
+  for (i = 0; i < 500; i++) {}
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (scoped_name (identifier)))
+    name: (identifier)
+    (block
+      (for_statement
+        init: (expression
+          (assignment_expression
+            left: (expression (primary_expression (identifier)))
+            operator: (assignment_operator)
+            right: (expression (primary_expression (integer_literal)))))
+        (semicolon)
         condition: (expression
           (binary_expression
             left: (expression (primary_expression (identifier)))
@@ -194,6 +226,37 @@ void f() {
           (break_statement (semicolon)))
         (switch_case
           (break_statement (semicolon)))))))
+
+================================================================================
+Identity operators is and !is
+================================================================================
+
+void f() {
+  if (a is b){}
+  if (a !is b){}
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (scoped_name (identifier)))
+    name: (identifier)
+    (block
+      (if_statement
+        condition: (expression
+          (binary_expression
+            left: (expression (primary_expression (identifier)))
+            operator: (is_operator)
+            right: (expression (primary_expression (identifier)))))
+        consequence: (block))
+      (if_statement
+        condition: (expression
+          (binary_expression
+            left: (expression (primary_expression (identifier)))
+            operator: (not_is_operator)
+            right: (expression (primary_expression (identifier)))))
+        consequence: (block)))))
 
 ================================================================================
 Handle reference with @

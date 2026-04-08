@@ -162,3 +162,85 @@ using namespace MyNamespace;
     name: (scoped_name (identifier))
     (semicolon)))
 
+================================================================================
+Reference qualifiers in class constructor
+================================================================================
+
+class A {
+  A(string &in a, string &out b, string &inout c, string& d) {}
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (class_declaration
+    name: (identifier)
+    (function_declaration
+      name: (identifier)
+      params: (parameter_list
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier))
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier))
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier))
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier)))
+      (block))))
+
+================================================================================
+Reference qualifiers in function
+================================================================================
+
+void f(string &in a, string &out b, string &inout c) {}
+
+--------------------------------------------------------------------------------
+
+(script
+  (function_declaration
+    return_type: (type (scoped_name (identifier)))
+    name: (identifier)
+    params: (parameter_list
+      (parameter
+        type: (type (scoped_name (identifier)))
+        name: (identifier))
+      (parameter
+        type: (type (scoped_name (identifier)))
+        name: (identifier))
+      (parameter
+        type: (type (scoped_name (identifier)))
+        name: (identifier)))
+    (block)))
+
+================================================================================
+Reference qualifiers in class method
+================================================================================
+
+class A {
+  void Method(string &in a, string &out b, string &inout c) {}
+}
+
+--------------------------------------------------------------------------------
+
+(script
+  (class_declaration
+    name: (identifier)
+    (function_declaration
+      return_type: (type (scoped_name (identifier)))
+      name: (identifier)
+      params: (parameter_list
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier))
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier))
+        (parameter
+          type: (type (scoped_name (identifier)))
+          name: (identifier)))
+      (block))))
+

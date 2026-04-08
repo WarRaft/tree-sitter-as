@@ -336,7 +336,10 @@ module.exports = grammar({
         for_statement: $ => seq(
             'for',
             '(',
-            optional(choice($.variable_declaration_statement, $.expression_statement)),
+            choice(
+                seq(field('init', $.variable_declaration), $.semicolon),
+                seq(field('init', optional($.expression)), $.semicolon),
+            ),
             field('condition', optional($.expression)),
             $.semicolon,
             field('update', optional($.expression_list)),
@@ -395,11 +398,11 @@ module.exports = grammar({
             optional($.semicolon),
         )),
 
-        variable_declaration_statement: $ => prec.right(seq(
+        variable_declaration_statement: $ => prec.dynamic(1, prec.right(seq(
             repeat($._modifier),
             $.variable_declaration,
             optional($.semicolon),
-        )),
+        ))),
 
         variable_declaration: $ => seq(
             field('type', $.type),
@@ -454,6 +457,9 @@ module.exports = grammar({
             '&=', '|=', '^=', '<<=', '>>=', '>>>=',
         ),
 
+        is_operator: _ => 'is',
+        not_is_operator: _ => seq('!', 'is'),
+
         ternary_expression: $ => prec.right(PREC.TERNARY, seq(
             field('condition', $.expression),
             '?',
@@ -469,8 +475,8 @@ module.exports = grammar({
             prec.left(PREC.BITWISE_XOR, seq(field('left', $.expression), field('operator', '^'), field('right', $.expression))),
             prec.left(PREC.BITWISE_AND, seq(field('left', $.expression), field('operator', '&'), field('right', $.expression))),
             prec.left(PREC.EQUALITY, seq(field('left', $.expression), field('operator', choice('==', '!=')), field('right', $.expression))),
-            prec.left(PREC.EQUALITY, seq(field('left', $.expression), field('operator', 'is'), field('right', $.expression))),
-            prec.left(PREC.EQUALITY, seq(field('left', $.expression), field('operator', seq('!', 'is')), field('right', $.expression))),
+            prec.left(PREC.EQUALITY, seq(field('left', $.expression), field('operator', $.is_operator), field('right', $.expression))),
+            prec.left(PREC.EQUALITY, seq(field('left', $.expression), field('operator', $.not_is_operator), field('right', $.expression))),
             prec.left(PREC.RELATIONAL, seq(field('left', $.expression), field('operator', choice('<', '>', '<=', '>=')), field('right', $.expression))),
             prec.left(PREC.RELATIONAL, seq(field('left', $.expression), field('operator', 'xor'), field('right', $.expression))),
             prec.left(PREC.BITSHIFT, seq(field('left', $.expression), field('operator', choice('<<', '>>', '>>>')), field('right', $.expression))),
@@ -580,7 +586,7 @@ module.exports = grammar({
             optional(seq('<', $.type, repeat(seq(',', $.type)), '>')),
             optional($.array_type_suffix),
             optional('@'),
-            optional('&'),
+            optional(seq('&', optional(choice('in', 'out', 'inout')))),
             optional('?'),
         ),
 
